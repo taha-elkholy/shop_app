@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/categories_model/categories_model.dart';
 import 'package:shop_app/models/change_favorites_model/change_favorites_model.dart';
@@ -14,7 +14,7 @@ import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/shop_states.dart';
 import 'package:shop_app/shared/network/end_points.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
-import 'package:shop_app/shared/network/remot/dio_helper.dart';
+import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
 class ShopCubit extends Cubit<ShopStates> {
   // constructor match super with initial state of app
@@ -77,7 +77,9 @@ class ShopCubit extends Cubit<ShopStates> {
     // before login as token = null and app will crash
     // we must get data in login also and register success states
     if (token != null) {
-      print(token);
+      if (kDebugMode) {
+        print(token);
+      }
       emit(ShopLoadingHomeDataState());
       DioHelper.getData(
         url: HOME,
@@ -88,9 +90,9 @@ class ShopCubit extends Cubit<ShopStates> {
         // add products data to the home model object
         homeModel = HomeModel.fromJson(value.data);
         // add the Favorites products in the map
-        homeModel!.data.products.forEach((element) {
+        for (var element in homeModel!.data.products) {
           inFavorites.addAll({element.id: element.inFavorites});
-        });
+        }
         // for (var element in homeModel!.data.products) {
         //   inFavorites.addAll({element.id: element.inFavorites});
         // }
@@ -98,7 +100,9 @@ class ShopCubit extends Cubit<ShopStates> {
         emit(ShopSuccessHomeDataState());
       }).catchError((error) {
         emit(ShopErrorHomeDataState(error.toString()));
-        print(error.toString());
+        if (kDebugMode) {
+          print(error.toString());
+        }
       });
     }
   }
@@ -121,7 +125,9 @@ class ShopCubit extends Cubit<ShopStates> {
         token: token!,
       ).then((value) {
         changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
-        print(value.data);
+        if (kDebugMode) {
+          print(value.data);
+        }
         // if user click on favorite button it will change it's color
         // then do the task in background
         // so if the process came with false
@@ -137,7 +143,9 @@ class ShopCubit extends Cubit<ShopStates> {
       }).catchError((error) {
         inFavorites[productId] = !inFavorites[productId]!;
         emit(ShopErrorChangeFavoritesState(error.toString()));
-        print(error.toString());
+        if (kDebugMode) {
+          print(error.toString());
+        }
       });
     }
   }
@@ -152,7 +160,9 @@ class ShopCubit extends Cubit<ShopStates> {
         categoriesModel = CategoriesModel.fromJson(value.data);
         emit(ShopSuccessCategoriesState());
       }).catchError((error) {
-        print(error.toString());
+        if (kDebugMode) {
+          print(error.toString());
+        }
         emit(ShopErrorCategoriesState(error.toString()));
       });
     }
@@ -169,7 +179,9 @@ class ShopCubit extends Cubit<ShopStates> {
         getFavoritesModel = FavoritesModel.fromJson(value.data);
         emit(ShopSuccessGetFavoritesState());
       }).catchError((error) {
-        print(error.toString());
+        if (kDebugMode) {
+          print(error.toString());
+        }
         emit(ShopErrorGetFavoritesState(error.toString()));
       });
     }
@@ -187,7 +199,9 @@ class ShopCubit extends Cubit<ShopStates> {
         userDataModel = LoginModel.fromJson(value.data);
         emit(ShopSuccessGetUserDataState(userDataModel!));
       }).catchError((error) {
-        print(error.toString());
+        if (kDebugMode) {
+          print(error.toString());
+        }
         emit(ShopErrorGetUserDataState(error.toString()));
       });
     }
@@ -215,7 +229,9 @@ class ShopCubit extends Cubit<ShopStates> {
         userDataModel = LoginModel.fromJson(value.data);
         emit(ShopSuccessUpdateUserDataState(userDataModel!));
       }).catchError((error) {
-        print(error.toString());
+        if (kDebugMode) {
+          print(error.toString());
+        }
         emit(ShopErrorUpdateUserDataState(error.toString()));
       });
     }

@@ -1,16 +1,15 @@
 # shop_app
 
-Shop Flutter Application
+A Flutter project for Online shopping 
 
-## Getting Started
+* Light Theme and Dark Theme
 
-This project is a starting point for a Flutter application.
+# Plugins
 
-A few resources to get you started if this is your first Flutter project:
+- bloc & flutter_bloc for state management
+- shared preferences for cache data
+- Dio for connect to the internet and fetch data
+- conditional_builder_null_safety for build conditional Widgets
+- smooth_page_indicator & carousel_slider for page view 
+- fluttertoast to show custom toast
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on
-mobile development, and a full API reference.

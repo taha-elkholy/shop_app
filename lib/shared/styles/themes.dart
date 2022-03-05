@@ -36,8 +36,8 @@ ThemeData darkTheme = ThemeData(
       FloatingActionButtonThemeData(backgroundColor: defaultColor),
   scaffoldBackgroundColor: HexColor('333739'),
   appBarTheme: AppBarTheme(
-// backwardsCompatibility false make me
-// able to control status bar values if true i can't
+    // backwardsCompatibility false make me
+    // able to control status bar values if true i can't
     systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: HexColor('333739'),
         statusBarIconBrightness: Brightness.light),

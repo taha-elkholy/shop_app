@@ -6,7 +6,7 @@ import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/shop_cubit.dart';
 import 'package:shop_app/shared/cubit/shop_states.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
-import 'package:shop_app/shared/network/remot/dio_helper.dart';
+import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
 
 import 'layout/shop_layout/shop_layout.dart';
@@ -15,8 +15,6 @@ import 'modules/on_boarding/on_boarding_screen.dart';
 void main() async {
   // wait while the async process finish then run the app
   WidgetsFlutterBinding.ensureInitialized();
-
-
 
   //init sharedPreferences from CashHelper
   await CashHelper.init();
@@ -46,15 +44,14 @@ void main() async {
   DioHelper.init();
 
   BlocOverrides.runZoned(
-        () {
-          runApp(MyApp(
-            isDark: _isDark,
-            home: home,
-          ));
+    () {
+      runApp(MyApp(
+        isDark: _isDark,
+        home: home,
+      ));
     },
     blocObserver: MyBlocObserver(),
   );
-
 }
 
 class MyApp extends StatelessWidget {
@@ -71,7 +68,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      // use MultiBlocProvider if we have more than one cubit in the same app
+        // use MultiBlocProvider if we have more than one cubit in the same app
         // provide all Cubits here and consume them any where
         providers: [
           // Shop app cubit provided here

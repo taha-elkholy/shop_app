@@ -18,10 +18,17 @@ class ShopLayout extends StatelessWidget {
             title: const Text('Salla'),
             actions: [
               IconButton(
-                  onPressed: () {
-                    navigateTo(context, SearchScreen());
-                  },
-                  icon: const Icon(Icons.search))
+                onPressed: () {
+                  navigateTo(context, SearchScreen());
+                },
+                icon: const Icon(Icons.search),
+              ),
+              IconButton(
+                onPressed: () {
+                  cubit.changeAppMode();
+                },
+                icon: const Icon(Icons.dark_mode),
+              ),
             ],
           ),
           body: cubit.bottomsScreens[cubit.currentIndex],

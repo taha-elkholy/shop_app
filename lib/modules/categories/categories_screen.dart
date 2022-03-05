@@ -1,5 +1,4 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/categories_model/categories_model.dart';
@@ -49,7 +48,9 @@ class CategoriesScreen extends StatelessWidget {
             ),
             const Spacer(),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  //todo
+                },
                 icon: const Icon(Icons.arrow_forward_ios_rounded))
           ],
         ),
